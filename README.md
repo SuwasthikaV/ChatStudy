@@ -73,8 +73,58 @@ Client-server chat applications are versatile tools that facilitate real-time co
 
 Client-server chat applications are foundational to real-time communication over networks. They incorporate principles of socket programming, communication protocols, and security mechanisms to provide a seamless user experience. Understanding the basics of client-server chat applications is essential for developers involved in networked application development, as they form the backbone of various collaborative communication systems. As technology evolves, chat applications continue to adapt, incorporating new features and technologies to enhance user interaction and connectivity.
 
+## Algorithm:
+Client–Server Chat Application
+1.  Start
+2.  Initialize the server and bind it to a port.
+3.  Set the server to listen for client requests.
+4.  Initialize the client.
+5.  Client sends connection request to server.
+6.  Server accepts the client connection.
+7.  Client sends chat message to server.
+8.  Server receives and forwards the message to client.
+9.  Close the connection and Stop
+
+## programe:
+## server.py:
+~~~
+import socket
+host = "127.0.0.1"
+port = 12345
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server_socket.bind((host, port))
+server_socket.listen(1)
+print("Server is listening on", host, ":", port)
+conn, addr = server_socket.accept()
+print("Connection from:", addr)
+while True:
+    data = conn.recv(1024).decode()
+    if not data:
+        break
+    print("Client:", data)
+    message = input("Server: ")
+    conn.send(message.encode())
+conn.close()
+~~~
+
+## client.py:
+~~~
+import socket
+host = "127.0.0.1"
+port = 12345
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client_socket.connect((host, port))
+while True:
+    message = input("Client: ")
+    client_socket.send(message.encode())
+    data = client_socket.recv(1024).decode()
+    print("Server:", data)
+~~~
+
+## output:
+<img width="1105" height="313" alt="image" src="https://github.com/user-attachments/assets/f645d4e6-18d3-4cb1-96d7-e90e9c2b8b0b" />
+
 
 ## Result:
-
 Thus the study on Client Server Chat Applications has been performed
 
